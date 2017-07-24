@@ -22,23 +22,23 @@ days = (ticker.index[-1] - ticker.index[0]).days
 # print days
 cagr = ((ticker['Adj Close'][-1] / ticker['Adj Close'][0]) **
         (365.0 / days)) - 1
-print 'CAGR=', str(round(cagr, 4) * 100) + "%"
+print('CAGR=', str(round(cagr, 4) * 100) + "%")
 mu = cagr
 
 # create series of percentage daily returns and calculate volatility
 ticker['Returns'] = ticker['Adj Close'].pct_change()
 vol = ticker['Returns'].std() * math.sqrt(252)
-print "Annual Volatility=", str(round(vol, 4) * 100) + "%"
+print ("Annual Volatility=", str(round(vol, 4) * 100) + "%")
 
 # Monte Carlo Simulation
 
 S = ticker['Adj Close'][-1] 	# starting stock price ie. last close
 T = 252 						# Total nbumber of trading days
-t = 10							# number of trading days (10 = 2 weeks)
+t = 5								# number of trading days (10 = 2 weeks)
 
 simulation_end_price = []
 
-for count in range(10):
+for count in range(100):
     daily_return = np.random.normal(mu / T, vol / math.sqrt(T), t) + 1
     # print daily_return
 
@@ -53,22 +53,22 @@ for count in range(10):
 
 collection = []
 target_price = int(sys.argv[2])
-print target_price
+print(target_price)
 
 for price in simulation_end_price:
     if (price >= target_price):
         collection.append(price)
 
 # print collection
-print len(collection), len(simulation_end_price)
+# print len(collection), len(simulation_end_price)
 # print 32/100
 
 percent_hit = float(len(collection)) / len(simulation_end_price) * 100
 percenr_miss = 100 - percent_hit
 
-print "percent_hit", percent_hit
-print "percent_miss", percenr_miss
+print("percent_hit", percent_hit)
+print("percent_miss", percenr_miss)
 
 
 # print len(sys.argv)
-print 
+# print 

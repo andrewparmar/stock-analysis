@@ -38,7 +38,7 @@ t = 10							# number of trading days (10 = 2 weeks)
 
 simulation_end_price = []
 
-for count in range(10):
+for count in range(100):
     daily_return = np.random.normal(mu / T, vol / math.sqrt(T), t) + 1
     # print daily_return
 
