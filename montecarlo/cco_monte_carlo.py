@@ -18,7 +18,7 @@ ticker = pd.DataFrame(data.DataReader(symbol, 'yahoo', start_date, end_date))
 # print ticker
 
 # calculate Compound Annual Growth Rate (CAGR). CAGR = mu (mean return)
-days = (ticker.index[-1] - ticker.index[0]).days
+days = (ticker.index[-1] - ticker.index[0]).days		# using (a=b).days from datetime
 # print days
 cagr = ((ticker['Adj Close'][-1] / ticker['Adj Close'][0]) **
         (365.0 / days)) - 1
@@ -48,7 +48,7 @@ for count in range(100):
         price_list.append(price_list[-1] * x)
 
     simulation_end_price.append(price_list[-1])
-
+	
 # print simulation_end_price
 
 collection = []
