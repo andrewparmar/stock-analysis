@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import math
-import datetime
+import datetime as dt
 import sys
 from pandas_datareader import data
 # import matplotlib.pyplot as plt
@@ -9,9 +9,9 @@ from pandas_datareader import data
 # Preping Data
 
 # get ticker data
-start_date = datetime.datetime(2010, 1, 1)
-# end_date = datetime.datetime(2017, 6, 30)
-end_date = datetime.datetime.today()
+start_date = dt.datetime(2010, 1, 1)
+# end_date = dt.datetime(2017, 6, 30)
+end_date = dt.datetime.today()
 
 symbol = str(sys.argv[1])
 ticker = pd.DataFrame(data.DataReader(symbol, 'yahoo', start_date, end_date))
@@ -34,7 +34,14 @@ print ("Annual Volatility=", str(round(vol, 4) * 100) + "%")
 
 S = ticker['Adj Close'][-1] 	# starting stock price ie. last close
 T = 252 						# Total nbumber of trading days
-t = 5								# number of trading days (10 = 2 weeks)
+
+# number of trading days
+dt_arg = sys.argv[3]
+# dt_arg = '20170817'
+start_date = dt.date.today()
+end_date = dt.date(int(dt_arg[0:4]),int(dt_arg[4:6]),int(dt_arg[6:]))
+t = np.busday_count(start_date, end_date)
+print t
 
 simulation_end_price = []
 
@@ -66,8 +73,8 @@ for price in simulation_end_price:
 percent_hit = float(len(collection)) / len(simulation_end_price) * 100
 percenr_miss = 100 - percent_hit
 
-print("percent_hit", percent_hit)
-print("percent_miss", percenr_miss)
+print("percent_hit", "{:.2f}".format(percent_hit))
+print("percent_miss", "{:.2f}".format(percenr_miss))
 
 
 # print len(sys.argv)

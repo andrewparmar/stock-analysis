@@ -1,4 +1,4 @@
-from pattern.web import URL
+# from pattern.web import URL
 import pandas as pd
 
 def extract_data(stk_ticker):
