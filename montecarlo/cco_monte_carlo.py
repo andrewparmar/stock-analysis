@@ -52,7 +52,7 @@ for count in range(100):
 # print simulation_end_price
 
 collection = []
-target_price = int(sys.argv[2])
+target_price = float(sys.argv[2])
 print target_price
 
 for price in simulation_end_price:

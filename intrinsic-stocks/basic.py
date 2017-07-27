@@ -8,7 +8,7 @@ import pandas_datareader.data as web
 import datetime
 
 start_date = datetime.datetime(2010, 1, 1)
-end_date = datetime.datetime(2017, 6, 30)
+end_date = datetime.datetime.today()
 
 APPL = pd.DataFrame(web.DataReader('AAPL', 'google', start_date, end_date))
 # print APPL
@@ -18,7 +18,7 @@ APPL = pd.DataFrame(web.DataReader('AAPL', 'google', start_date, end_date))
 # s = APPL.iloc[3]
 # # print s
 # APPL.append(s, ignore_index=True)
-# print APPL
+print APPL
 
 plt.plot(APPL['Close'])
 
